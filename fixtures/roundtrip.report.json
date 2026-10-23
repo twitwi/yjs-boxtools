@@ -1,0 +1,23 @@
+{
+  "updateSha256": "88427714c420d4e4429470eaef9e1b50e02ea5bf89acbe8988edfb546f291fba",
+  "isEmpty": false,
+  "files": [
+    "dir/",
+    "dir/inner/",
+    "dir/moved.typ",
+    "img/",
+    "img/pixel.png"
+  ],
+  "entries": {
+    "dir/moved.typ": {
+      "str": "= Deep\n",
+      "bytesHex": "3d20446565700a",
+      "isBinary": false
+    },
+    "img/pixel.png": {
+      "str": "iVBORw0KGgoAAAAN",
+      "bytesHex": "89504e470d0a1a0a0000000d",
+      "isBinary": true
+    }
+  }
+}

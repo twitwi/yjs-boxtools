@@ -1,0 +1,18 @@
+{
+  "updateSha256": "c7df2e9f8077230c6cb246e72c090d35c76544333e6bad0d18996641eb552fe5",
+  "files": [
+    "dir/",
+    "dir/keep.typ",
+    "stale/"
+  ],
+  "dropped": 4,
+  "reclaimedIds": [
+    "id:x22ilc4c",
+    "id:xvkpyjh5"
+  ],
+  "orphanId": "id:maeizbll",
+  "moved": {
+    "newDocumentPath": "NEW/DOC",
+    "comment": "moved comment"
+  }
+}

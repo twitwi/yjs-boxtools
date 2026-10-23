@@ -1,0 +1,29 @@
+{
+  "updateSha256": "877f57087939c6c1bb773cc788073f097a18af58b87fb66a4e5217433f08d659",
+  "isEmpty": false,
+  "files": [
+    "dir/",
+    "dir/inner/",
+    "dir/moved.typ",
+    "img/",
+    "img/pixel.png",
+    "notes.txt"
+  ],
+  "entries": {
+    "dir/moved.typ": {
+      "str": "= Deep\nline\n",
+      "bytesHex": "3d20446565700a6c696e650a",
+      "isBinary": false
+    },
+    "img/pixel.png": {
+      "str": "iVBORw0KGgoAAAAN",
+      "bytesHex": "89504e470d0a1a0a0000000d",
+      "isBinary": true
+    },
+    "notes.txt": {
+      "str": "note\n",
+      "bytesHex": "6e6f74650a",
+      "isBinary": false
+    }
+  }
+}

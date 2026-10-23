@@ -1,0 +1,62 @@
+{
+  "name": "yjs-boxtools",
+  "version": "0.1.0",
+  "description": "Lean virtual-filesystem-in-a-box toolkit for Yjs: text/binary files, directories, watchers and provider setup.",
+  "type": "module",
+  "license": "ISC",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "import": "./src/index.ts"
+    },
+    "./paths": {
+      "types": "./src/paths.ts",
+      "import": "./src/paths.ts"
+    },
+    "./vfs": {
+      "types": "./src/vfs.ts",
+      "import": "./src/vfs.ts"
+    },
+    "./box": {
+      "types": "./src/box.ts",
+      "import": "./src/box.ts"
+    },
+    "./watch": {
+      "types": "./src/watch.ts",
+      "import": "./src/watch.ts"
+    },
+    "./setup": {
+      "types": "./src/setup.ts",
+      "import": "./src/setup.ts"
+    }
+  },
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "y-indexeddb": "^9.0.12",
+    "y-websocket": "^2.0.0 || ^3.0.0",
+    "yjs": "^13.6"
+  },
+  "peerDependenciesMeta": {
+    "y-indexeddb": {
+      "optional": true
+    },
+    "y-websocket": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@types/node": "^25.0.0",
+    "tsx": "^4.21.0",
+    "typescript": "~5.8.0",
+    "vitest": "^3.2.7",
+    "y-indexeddb": "^9.0.12",
+    "y-websocket": "^3.0.0",
+    "yjs": "^13.6.24"
+  }
+}
