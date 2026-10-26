@@ -5,7 +5,7 @@
 //   box    doc-level entry points (plain map paths and /@/ full paths)
 //   setup  provider setup + readiness gate + config parsing
 
-export { SEP, TAGSEP, BOX_MARKER, ROOT_ID, splitBoxPath, joinBoxPath, parseHash } from './paths'
+export { SEP, TAGSEP, BOX_MARKER, ROOT_ID, splitBoxPath, joinBoxPath, stripInBoxSuffix, inBoxPath, parseHash } from './paths'
 export type { SplitBoxPath, ParsedHash } from './paths'
 export { createVfs } from './vfs'
 export type { Vfs } from './vfs'

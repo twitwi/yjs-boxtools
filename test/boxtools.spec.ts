@@ -1,8 +1,8 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import * as Y from 'yjs'
 import {
-  checkMoved, getFileText, joinBoxPath, listBoxFiles, openBox, openMap, openVfs,
-  parseConfig, parseHash, pathOfId, splitBoxPath, watchBox, watchFile,
+  checkMoved, getFileText, inBoxPath, joinBoxPath, listBoxFiles, openBox, openMap, openVfs,
+  parseConfig, parseHash, pathOfId, splitBoxPath, stripInBoxSuffix, watchBox, watchFile,
 } from '../src/index'
 import { newDocWithFile } from './helpers'
 
@@ -21,6 +21,24 @@ describe('splitBoxPath', () => {
   })
   it('joinBoxPath round-trips', () => {
     expect(joinBoxPath('BOX', 'shop.yaml')).toBe('BOX/@/shop.yaml')
+  })
+})
+
+describe('stripInBoxSuffix / inBoxPath', () => {
+  it('strips a trailing /@/ suffix from a config path', () => {
+    expect(stripInBoxSuffix('BOX/@/lists/old.yaml')).toBe('BOX')
+    expect(stripInBoxSuffix('BOX/@/shop.yaml')).toBe('BOX')
+  })
+  it('leaves a bare box path unchanged', () => {
+    expect(stripInBoxSuffix('BOX')).toBe('BOX')
+    expect(stripInBoxSuffix('sub/folder')).toBe('sub/folder')
+  })
+  it('builds a full in-box path from a bare config path', () => {
+    expect(inBoxPath('BOX', 'shop.yaml')).toBe('BOX/@/shop.yaml')
+    expect(inBoxPath('sub/folder', 'lists/old.yaml')).toBe('sub/folder/@/lists/old.yaml')
+  })
+  it('builds a full in-box path from a config path that already has /@/', () => {
+    expect(inBoxPath('BOX/@/lists', 'shop.yaml')).toBe('BOX/@/shop.yaml')
   })
 })
 

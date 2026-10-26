@@ -59,3 +59,19 @@ export function splitBoxPath(fullPath: string): SplitBoxPath {
 export function joinBoxPath(boxPath: string, innerPath: string): string {
   return `${boxPath}/${BOX_MARKER}/${innerPath}`
 }
+
+/**
+ * Normalize a possibly in-box config path to its bare box map path by stripping
+ * any trailing "/@/..." suffix. A bare box path passes through unchanged.
+ */
+export function stripInBoxSuffix(configPath: string): string {
+  return configPath.replace(/\/@\/.*$/, '')
+}
+
+/**
+ * Full in-box path of `file` inside the box that `configPath` refers to.
+ * `configPath` may already carry a "/@/..." suffix; it is stripped first.
+ */
+export function inBoxPath(configPath: string, file: string): string {
+  return joinBoxPath(stripInBoxSuffix(configPath), file)
+}

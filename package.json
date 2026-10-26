@@ -1,6 +1,6 @@
 {
   "name": "yjs-boxtools",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Lean virtual-filesystem-in-a-box toolkit for Yjs: text/binary files, directories, watchers and provider setup.",
   "type": "module",
   "license": "ISC",
