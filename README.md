@@ -102,9 +102,13 @@ a freshly created node.
    unsynced doc gives every peer its own root map; root-key LWW orphans all
    but one, while everyone still reports `synced`. Wait for the first sync
    (`setupYjs(...).whenReady`, or `provider.on('sync')`).
-2. **Bots/headless peers should use `disableBc: true`.** y-websocket's
-   BroadcastChannel makes same-process peers sync synchronously, hiding
-   network behavior.
+2. **Turn cross-tab sync off when it suits you: `bc: false`.** y-websocket syncs
+   the tabs of one browser through a BroadcastChannel, answering a peer's sync
+   with the *local* doc — refused updates included (`bc: false` is
+   `disableBc: true`). Bots/headless peers want that to see real network
+   behaviour, and an app treating the box as its only source of truth wants it
+   too: otherwise an edit the server rejected keeps showing up in every tab of
+   that browser until the last one closes.
 3. **Let a disconnect settle before reconnecting.** `disconnect()` +
    immediate `connect()` races the close handshake and can leave a provider
    `synced` while missing updates (stable divergence).

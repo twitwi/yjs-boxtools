@@ -1,4 +1,5 @@
-// Provider setup: Y.Doc + websocket + IndexedDB with a readiness gate.
+// Provider setup: Y.Doc + websocket (+ optionally IndexedDB and the cross-tab
+// BroadcastChannel) with a readiness gate.
 //
 // Nothing may be resolved or written before `whenReady` settles: it waits
 // for IndexedDB + the first websocket sync, with a timeout so offline
@@ -35,6 +36,14 @@ export interface ConnectionOptions {
   websocket?: boolean
   indexeddb?: boolean
   idbKey?: string
+  /**
+   * Cross-tab sync (y-websocket's BroadcastChannel), true by default. With it on,
+   * a tab answers another tab's sync with its own local state — which includes
+   * updates the server refused (a read-only token), so an unsavable edit keeps
+   * showing up in every tab of that browser until the last one closes. Turn it off
+   * when the box is the only source of truth; peers then only ever meet the server.
+   */
+  bc?: boolean
   /** Cap on waiting for first sync; offline startup must never hang. */
   syncTimeoutMs?: number
 }
@@ -65,13 +74,14 @@ export function checkMoved(ydoc: Y.Doc): { newDocumentPath: string; comment: str
 // read-only mode etc. is app policy, not connection policy). The box path
 // is not needed to connect; resolving it is the box layer's job.
 export function setupYjs(config: BoxConfig | ParsedHash, options: ConnectionOptions = {}): Connection {
-  const { websocket = true, indexeddb = true, idbKey, syncTimeoutMs = 4000 } = options
+  const { websocket = true, indexeddb = true, bc = true, idbKey, syncTimeoutMs = 4000 } = options
   const ydoc = new Y.Doc()
   const provider = websocket
     ? new WebsocketProvider(
         config.server.includes('://') ? config.server : `wss://${config.server}`,
         `${config.docname}?t=${config.token}`,
         ydoc,
+        { disableBc: !bc },
       )
     : null
   const persistence = indexeddb ? new IndexeddbPersistence(idbKey ?? `yjs-box-${config.docname}`, ydoc) : null
